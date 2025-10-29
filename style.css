@@ -56,3 +56,19 @@ button{
 .operator{
     color: aqua;
 }
+@media (max-width: 400px) {
+  .calculator {
+    max-width: 280px;
+    padding: 15px;
+  }
+
+  #inputBox {
+    font-size: 1.2rem;
+    height: 50px;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
