@@ -29,6 +29,12 @@ function handleInput(key) {
     string = string.substring(0, string.length - 1);
     input.value = string;
   } 
+  else if ("+-*/.%".includes(key)) {
+    // prevent consecutive operators
+    if (string === "" || "+-*/.%".includes(string.slice(-1))) return;
+    string += key;
+    input.value = string;
+  } 
   else if ("0123456789+-*/.%".includes(key)) {
     string += key;
     input.value = string;
