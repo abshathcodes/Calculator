@@ -1,27 +1,37 @@
 var input = document.getElementById("inputBox");
-var button = document.querySelectorAll("button");
-
+var buttons = document.querySelectorAll("button");
 var string = "";
-var arr = Array.from(button);
-arr.forEach(button => {
-    button.addEventListener("click", (e)=>{
-        if(e.target.innerHTML === "="){
-            string = eval (string);
-            input.value = string;
-        }
-        else if (e.target.innerHTML === "AC"){
-            string ="";
-            input.value = string;
-        }
-        else if(e.target.innerHTML === "DEL"){
-            string = string.substring(0, string.length-1);
-            input.value = string;
-        }
-        else{
-             string += e.target.innerHTML;
-            input.value = string;
-        }
-       
-    });
+input.disabled = true;
+
+// Button click events
+buttons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    handleInput(e.target.innerHTML);
+  });
 });
+
+// Keyboard events
+document.addEventListener("keydown", (e) => {
+  handleInput(e.key);
+});
+
+// Main function for both click + key
+function handleInput(key) {
+  if (key === "=" || key === "Enter") {
+    string = eval(string);
+    input.value = string;
+  } 
+  else if (key === "AC" || key === "Escape") {
+    string = "";
+    input.value = string;
+  } 
+  else if (key === "DEL" || key === "Backspace") {
+    string = string.substring(0, string.length - 1);
+    input.value = string;
+  } 
+  else if ("0123456789+-*/.%".includes(key)) {
+    string += key;
+    input.value = string;
+  }
+}
 
